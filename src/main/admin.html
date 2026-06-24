@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Admin - Dark</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/theme-chalk/dark/css-vars.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/element-plus"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        body { background-color: #121212 !important; color: #eee; margin: 0; padding: 20px; }
+        .admin-card { background: #1e1e1e !important; border: 1px solid #333 !important; }
+    </style>
+</head>
+<body>
+<div id="app">
+    <el-card class="admin-card">
+        <template #header>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-weight: bold; font-size: 18px;">🛡 英雄数据库管理系统</span>
+                <div>
+                    <el-button type="success" @click="showAdd = true">添加新角色</el-button>
+                    <el-button type="info" @click="refresh">重载数据</el-button>
+                </div>
+            </div>
+        </template>
+
+        <el-table :data="list" style="width: 100%" stripe>
+            <el-table-column prop="id" label="ID" width="80"></el-table-column>
+            <el-table-column prop="name" label="角色名称"></el-table-column>
+            <el-table-column prop="level" label="初始星级" width="120"></el-table-column>
+            <el-table-column label="操作" width="150">
+                <template #default="s">
+                    <el-button type="danger" size="small" @click="del(s.row.name)">遣散</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+    </el-card>
+
+    <el-dialog v-model="showAdd" title="录入新英雄" width="30%">
+        <el-form label-width="80px">
+            <el-form-item label="角色名">
+                <el-input v-model="form.name" placeholder="请输入名字"></el-input>
+            </el-form-item>
+            <el-form-item label="初始等级">
+                <el-input-number v-model="form.level" :min="1" :max="100"></el-input-number>
+            </el-form-item>
+        </el-form>
+        <template #footer>
+            <el-button @click="showAdd = false">取消</el-button>
+            <el-button type="primary" @click="submitAdd">确认添加</el-button>
+        </template>
+    </el-dialog>
+</div>
+
+<script>
+    const { createApp, ref, onMounted } = Vue;
+    createApp({
+        setup() {
+            const list = ref([]);
+            const showAdd = ref(false);
+            const form = ref({ name: '', level: 1 });
+
+            const refresh = async () => {
+                const res = await axios.get('http://localhost:8080/allheros');
+                list.value = res.data.data;
+            };
+
+            const submitAdd = async () => {
+                if(!form.value.name) return ElementPlus.ElMessage.error("名字不能为空");
+                // 对接你的 /add/{name} 接口，虽然你现在的接口固定设为1级，
+                // 但我们可以在前端传参，后续你可以修改后端支持传入等级
+                try {
+                    const res = await axios.get(`http://localhost:8080/add/${form.value.name}`);
+                    if(res.data.code === 200) {
+                        ElementPlus.ElMessage.success("英雄录入成功！");
+                        showAdd.value = false;
+                        form.value.name = '';
+                        refresh();
+                    } else {
+                        ElementPlus.ElMessage.error(res.data.message); // 弹出“角色已存在”
+                    }
+                } catch(e) { ElementPlus.ElMessage.error("系统故障"); }
+            };
+
+            const del = async (name) => {
+                await axios.get(`http://localhost:8080/deletehero/${name}`);
+                refresh();
+            };
+
+            onMounted(refresh);
+            return { list, showAdd, form, refresh, submitAdd, del };
+        }
+    }).use(ElementPlus).mount('#app');
+</script>
+</body>
+</html>

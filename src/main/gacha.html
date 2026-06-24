@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <title>DREAM GACHA - Pro DashBoard</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/theme-chalk/dark/css-vars.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/element-plus"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        html, body {
+            background-color: #0d0d0d !important;
+            margin: 0; padding: 0; color: #fff; font-family: 'Segoe UI', sans-serif;
+        }
+        #app { padding: 30px; display: grid; grid-template-columns: 1fr 300px; gap: 20px; }
+
+        /* 核心舞台 */
+        .main-stage {
+            background: radial-gradient(circle at center, #1a1b26 0%, #050505 100%);
+            border: 1px solid #333; border-radius: 15px; padding: 20px;
+        }
+        .draw-box {
+            min-height: 350px; display: flex; justify-content: center;
+            align-items: center; flex-wrap: wrap; gap: 15px; margin-top: 20px;
+        }
+
+        /* 卡片设计 */
+        .card-node { text-align: center; width: 85px; }
+        .card-img {
+            width: 80px; height: 110px; border-radius: 6px;
+            border: 2px solid #444; background: #222;
+        }
+        .lv5 { border-color: #ff9a00; box-shadow: 0 0 15px #ff9a00; }
+        .lv3 { border-color: #a020f0; box-shadow: 0 0 8px #a020f0; }
+
+        /* 数据侧边栏 */
+        .stats-panel { background: #161616; border-radius: 10px; padding: 15px; border: 1px solid #333; }
+        .stat-item { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px; }
+        .progress-label { font-size: 12px; color: #888; margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="main-stage">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+            <div>
+                <h1 style="margin: 0; color: #409EFF;">DREAM PRAYER</h1>
+                <p style="color: #666; margin: 5px 0;">当前已累计祈愿：<span style="color: #fff; font-weight: bold;">{{ totalCount }}</span> 次</p>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <el-button type="primary" size="large" plain @click="draw('single')">祈愿 1 次</el-button>
+                <el-button type="warning" size="large" @click="draw('ten')">祈愿 10 次</el-button>
+            </div>
+        </div>
+
+        <div style="margin: 20px 0;">
+            <div class="progress-label">距离 90 抽大保底进度 ({{ totalCount % 90 }} / 90)</div>
+            <el-progress :percentage="((totalCount % 90) / 90 * 100).toFixed(1)" color="#ff9a00" :stroke-width="10"></el-progress>
+        </div>
+
+        <div class="draw-box">
+            <div v-if="currentResults.length === 0" style="color: #333; font-size: 30px; font-weight: bold;">WAITTING...</div>
+            <div v-for="(c, i) in currentResults" :key="i" class="card-node">
+                <img :src="getAvatar(c.level)" :class="['card-img', 'lv'+c.level]">
+                <div style="font-size: 11px; margin-top: 5px; color: #999;">第 {{ c.pityNum }} 抽</div>
+                <div style="font-size: 12px; color: #eee; overflow: hidden; white-space: nowrap;">{{ c.name }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats-panel">
+        <h3 style="margin-top: 0; color: #409EFF; border-bottom: 1px solid #333; padding-bottom: 10px;">📊 持有清单</h3>
+        <el-scrollbar height="600px">
+            <div v-for="(count, name) in inventory" :key="name" class="stat-item">
+                <span :style="{color: getCharColor(name)}">{{ name }}</span>
+                <span style="color: #888;">x {{ count }}</span>
+            </div>
+        </el-scrollbar>
+    </div>
+</div>
+
+<script>
+    const { createApp, ref } = Vue;
+    createApp({
+        setup() {
+            const currentResults = ref([]);
+            const inventory = ref({});
+            const totalCount = ref(0);
+
+            const getAvatar = (lv) => `https://api.dicebear.com/7.x/identicon/svg?seed=${lv===5?'gold':'iron'}&backgroundColor=${lv===5?'b8860b':'2f4f4f'}`;
+
+            // 查找这个角色属于哪个等级颜色
+            const getCharColor = (name) => {
+                const char = currentResults.value.find(c => c.name === name);
+                if (char?.level === 5) return '#ff9a00';
+                return '#409EFF';
+            };
+
+            const draw = async (type) => {
+                try {
+                    const res = await axios.get(`http://localhost:8080/draw${type==='ten'?'Ten':''}`);
+
+                    // 1. 从后端 message 中获取真实的 totalPity
+                    const serverPity = parseInt(res.data.message);
+                    totalCount.value = serverPity; // 这样进度条永远和后台同步！
+
+                    const data = Array.isArray(res.data.data) ? res.data.data : [res.data.data];
+
+                    // 2. 处理本次结果展示
+                    currentResults.value = data.map((item, index) => {
+                        // 计算这一抽是总计第几抽（如果是十连，则根据当前水位倒推）
+                        const pityNum = type === 'ten' ? (serverPity - 9 + index) : serverPity;
+
+                        const record = { ...item, pityNum: pityNum };
+
+                        // 更新持有记录统计
+                        inventory.value[item.name] = (inventory.value[item.name] || 0) + 1;
+
+                        return record;
+                    });
+                } catch (e) {
+                    ElementPlus.ElMessage.error("同步失败");
+                }
+            };
+
+            return { currentResults, inventory, totalCount, draw, getAvatar, getCharColor };
+        }
+    }).use(ElementPlus).mount('#app');
+</script>
+</body>
+</html>
