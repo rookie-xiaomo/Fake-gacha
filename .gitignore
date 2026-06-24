@@ -1,33 +1,74 @@
-HELP.md
-target/
-.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+# IntelliJ IDEA
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
+.idea/
 *.iml
-*.ipr
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+# Maven
 
-### VS Code ###
+target/
+
+# Logs
+
+logs/
+*.log
+
+# Compiled class files
+
+*.class
+
+# Package files
+
+*.jar
+*.war
+*.ear
+
+# Temporary files
+
+*.tmp
+*.temp
+
+# OS generated files
+
+.DS_Store
+Thumbs.db
+
+# Maven Wrapper
+
+.mvn/wrapper/maven-wrapper.jar
+
+# Application local configuration
+
+application-local.properties
+application-local.yml
+
+# Database files
+
+*.db
+
+# Generated reports
+
+surefire-reports/
+
+# VS Code
+
 .vscode/
+
+# Eclipse
+
+.project
+.classpath
+.settings/
+
+# NetBeans
+
+nbproject/private/
+build/
+dist/
+
+# Test output
+
+test-output/
+
+# Spring Boot
+
+spring.log
