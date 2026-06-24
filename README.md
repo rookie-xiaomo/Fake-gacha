@@ -18,30 +18,6 @@
 
 ---
 
-## ✨ 项目预览
-
-> 建议运行项目后截图上传到 GitHub 仓库，然后替换下面图片链接。
-
-### 首页
-
-```text
-docs/images/index.png
-```
-
-### 抽卡界面
-
-```text
-docs/images/gacha.png
-```
-
-### 角色管理
-
-```text
-docs/images/character.png
-```
-
----
-
 ## 🚀 功能特性
 
 ### 🎯 抽卡系统
@@ -266,8 +242,6 @@ JDK 17
 ---
 
 ## 👨‍💻 作者
-
-张磊
 
 GitHub：
 
