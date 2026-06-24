@@ -1,71 +1,175 @@
-# Fake Gacha Demo
+# 🎲 Fake Gacha Demo
 
-一个基于 Spring Boot + MyBatis + MySQL 的抽卡模拟系统。
+![Java](https://img.shields.io/badge/Java-17-orange)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.0-brightgreen)
+![MyBatis](https://img.shields.io/badge/MyBatis-3.x-blue)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1)
+![Maven](https://img.shields.io/badge/Maven-3.8+-red)
+![License](https://img.shields.io/badge/License-Learning-lightgrey)
 
-## 项目简介
+一个基于 **Spring Boot + MyBatis + MySQL** 开发的抽卡模拟系统，用于模拟游戏中的角色抽取机制，实现角色管理、抽卡逻辑演示及数据持久化存储。
 
-Fake Gacha Demo 是一个模拟游戏抽卡机制的 Web 项目，支持角色数据管理、抽卡逻辑演示以及基础的数据查询功能，适合作为 Spring Boot 学习项目或课程设计参考。
+适合作为：
 
-## 技术栈
+* Java Web 课程设计
+* Spring Boot 学习项目
+* MyBatis 入门实践
+* GitHub 个人作品展示
 
-* Java 17+
-* Spring Boot 3.4.0
-* MyBatis
-* MySQL 8.x
-* Maven
+---
 
-## 环境要求
+## ✨ 项目预览
 
-### 开发环境
+> 建议运行项目后截图上传到 GitHub 仓库，然后替换下面图片链接。
 
-| 软件            | 推荐版本   |
-| ------------- | ------ |
-| JDK           | 17 或以上 |
-| Maven         | 3.8+   |
-| MySQL         | 8.0+   |
-| IntelliJ IDEA | 2023+  |
+### 首页
 
-## 项目获取
+```text
+docs/images/index.png
+```
+
+### 抽卡界面
+
+```text
+docs/images/gacha.png
+```
+
+### 角色管理
+
+```text
+docs/images/character.png
+```
+
+---
+
+## 🚀 功能特性
+
+### 🎯 抽卡系统
+
+* 单抽
+* 十连抽
+* 随机角色生成
+* 概率模拟
+
+### 👤 角色管理
+
+* 角色查询
+* 角色列表展示
+* 数据库存储
+
+### 💾 数据持久化
+
+* MySQL 数据库
+* MyBatis 映射管理
+* CRUD 操作
+
+### 🔧 系统架构
+
+* Spring Boot
+* MVC 分层设计
+* RESTful 接口风格
+
+---
+
+## 🛠 技术栈
+
+| 技术            | 说明      |
+| ------------- | ------- |
+| Java          | JDK 17  |
+| Spring Boot   | Web开发框架 |
+| MyBatis       | ORM框架   |
+| MySQL         | 数据存储    |
+| Maven         | 项目管理    |
+| IntelliJ IDEA | 开发工具    |
+
+---
+
+## 📁 项目结构
+
+```text
+Fake-gacha
+│
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── com.dream.demo
+│   │   │       ├── controller
+│   │   │       ├── service
+│   │   │       ├── mapper
+│   │   │       ├── entity
+│   │   │       └── DemoApplication
+│   │   │
+│   │   ├── resources
+│   │   │   ├── mapper
+│   │   │   ├── static
+│   │   │   ├── templates
+│   │   │   └── application.properties
+│   │
+│   └── test
+│
+├── pom.xml
+├── schema.sql
+└── README.md
+```
+
+---
+
+## ⚙️ 环境要求
+
+| 软件    | 版本    |
+| ----- | ----- |
+| JDK   | 17+   |
+| Maven | 3.8+  |
+| MySQL | 8.0+  |
+| IDEA  | 2023+ |
+
+---
+
+## 📦 快速开始
+
+### 1. 克隆项目
+
+SSH：
 
 ```bash
 git clone git@github.com:rookie-xiaomo/Fake-gacha.git
 ```
 
-或
+HTTPS：
 
 ```bash
 git clone https://github.com/rookie-xiaomo/Fake-gacha.git
 ```
 
-## 数据库配置
+---
 
-### 1. 创建数据库
-
-登录 MySQL 后执行：
+### 2. 创建数据库
 
 ```sql
 CREATE DATABASE game_db DEFAULT CHARACTER SET utf8mb4;
 ```
 
-### 2. 导入数据表
+---
 
-项目中提供了数据库初始化脚本：
+### 3. 导入数据库脚本
+
+执行项目中的：
 
 ```text
 schema.sql
 ```
 
-执行脚本完成表结构创建。
+完成表结构初始化。
 
-### 3. 修改数据库配置
+---
 
-打开：
+### 4. 修改数据库配置
+
+编辑：
 
 ```text
 src/main/resources/application.properties
 ```
-
-根据实际情况修改：
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/game_db
@@ -73,84 +177,51 @@ spring.datasource.username=root
 spring.datasource.password=123456
 ```
 
-如果数据库密码不是 `123456`，请修改为自己的密码。
+根据实际情况修改用户名和密码。
 
-## IDEA 启动项目
+---
 
-### 1. 导入项目
+### 5. 启动项目
 
-打开 IDEA：
+运行：
 
-```text
-File
- └ Open
+```java
+DemoApplication
 ```
 
-选择项目根目录。
-
-等待 Maven 自动加载依赖。
-
-### 2. 下载依赖
-
-若依赖未自动下载：
-
-```bash
-mvn clean install
-```
-
-### 3. 启动项目
-
-找到启动类：
-
-```text
-src/main/java/.../DemoApplication.java
-```
-
-点击运行按钮或执行：
+或者：
 
 ```bash
 mvn spring-boot:run
 ```
 
-启动成功后控制台会出现类似内容：
-
-```text
-Started DemoApplication
-```
-
-## 访问项目
-
-项目默认运行地址：
+启动成功后访问：
 
 ```text
 http://localhost:8080
 ```
 
-根据实际 Controller 配置访问对应页面。
+---
 
-## 常见问题
+## 🧪 常见问题
 
-### 1. Failed to configure a DataSource
+### 数据库连接失败
 
-原因：
+检查：
 
-* MySQL 未启动
-* 数据库配置错误
+```properties
+spring.datasource.url
+spring.datasource.username
+spring.datasource.password
+```
 
-解决：
-
-* 启动 MySQL 服务
-* 检查 application.properties 配置
+是否正确。
 
 ---
 
-### 2. Unknown database 'game_db'
+### Unknown database 'game_db'
 
-原因：
-
-数据库不存在。
-
-解决：
+执行：
 
 ```sql
 CREATE DATABASE game_db;
@@ -158,24 +229,7 @@ CREATE DATABASE game_db;
 
 ---
 
-### 3. Access denied for user 'root'
-
-原因：
-
-数据库账号或密码错误。
-
-解决：
-
-修改：
-
-```properties
-spring.datasource.username=
-spring.datasource.password=
-```
-
----
-
-### 4. Maven 依赖下载失败
+### Maven 下载失败
 
 执行：
 
@@ -183,30 +237,44 @@ spring.datasource.password=
 mvn clean install
 ```
 
-或更换 Maven 国内镜像源。
+或者配置阿里云 Maven 镜像。
 
-## 项目结构
+---
+
+### JDK版本不兼容
+
+推荐：
 
 ```text
-src
-├── main
-│   ├── java
-│   │   └── 项目源码
-│   └── resources
-│       ├── application.properties
-│       ├── mapper
-│       └── 静态资源
-│
-└── test
-    └── 测试代码
+JDK 17
 ```
 
-## 作者
+不要使用 JDK 8。
+
+---
+
+## 📈 后续优化方向
+
+* [ ] 抽卡概率公示
+* [ ] 保底机制
+* [ ] 用户系统
+* [ ] 登录注册
+* [ ] Redis缓存
+* [ ] Docker部署
+* [ ] 前后端分离
+
+---
+
+## 👨‍💻 作者
+
+张磊
 
 GitHub：
 
 https://github.com/rookie-xiaomo
 
-## License
+---
 
-仅供学习与交流使用。
+## 📄 License
+
+本项目仅供学习交流使用，请勿用于商业用途。
