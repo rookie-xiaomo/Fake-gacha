@@ -49,44 +49,6 @@
 
 ---
 
-# 🛠 技术栈
-
-| 技术 | 说明 |
-|------|------|
-| Java 17 | 开发语言 |
-| Spring Boot | Web 后端框架 |
-| MyBatis | 持久层框架 |
-| MySQL | 数据库 |
-| Maven | 项目管理 |
-| HTML | 页面开发 |
-| CSS | 页面样式 |
-| JavaScript | 页面交互 |
-| Axios | 前后端 HTTP 通信 |
-
----
-
-# 📂 项目结构
-
-```text
-src
-├── main
-│   ├── java
-│   │   └── com.dream
-│   │       ├── controller
-│   │       ├── Service
-│   │       ├── mapper
-│   │       ├── entity
-│   │       └── common
-│   │
-│   └── resources
-│       ├── static
-│       │   ├── gacha.html
-│       │   └── admin.html
-│       ├── mapper
-│       └── application.properties
-```
-
----
 
 # 🚀 已实现功能
 
@@ -498,17 +460,6 @@ index.html
 
 ---
 
-# 📈 后续计划
-
-- [ ] 登录功能
-- [ ] 用户抽卡记录
-- [ ] 图片资源替换
-- [ ] 优化抽卡动画
-- [ ] 用户背包持久化
-- [ ] Docker 部署
-- [ ] Redis 缓存
-
----
 
 # 👨‍💻 作者
 
