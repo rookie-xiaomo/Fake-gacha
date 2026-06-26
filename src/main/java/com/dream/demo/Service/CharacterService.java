@@ -98,4 +98,11 @@ public class CharacterService {
             return false;
         }
     }
+
+    @Transactional
+    public void reset() {
+        totalPity = 0;
+        tenPity = 0;
+    }
+
 }

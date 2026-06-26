@@ -96,4 +96,10 @@ public class HelloController {
         }
     }
 
+    @GetMapping("/reset")
+    public Result<String> reset() {
+        characterService.reset();
+        return Result.success("重置成功");
+    }
+
 }
