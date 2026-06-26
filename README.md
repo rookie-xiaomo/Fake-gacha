@@ -1,4 +1,4 @@
-# 🎲 Fake Gacha Demo
+# 🎲 Fake Gacha
 
 ![Java](https://img.shields.io/badge/Java-17-orange)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.0-brightgreen)
@@ -7,195 +7,398 @@
 ![Maven](https://img.shields.io/badge/Maven-3.8+-red)
 ![License](https://img.shields.io/badge/License-Learning-lightgrey)
 
-一个基于 **Spring Boot + MyBatis + MySQL** 开发的抽卡模拟系统，用于模拟游戏中的角色抽取机制，实现角色管理、抽卡逻辑演示及数据持久化存储。
+一个基于 **Spring Boot + MyBatis + MySQL** 开发的抽卡模拟系统，通过 RESTful 接口实现角色管理与抽卡逻辑，并提供静态页面进行功能演示。
 
 适合作为：
 
-* Java Web 课程设计
-* Spring Boot 学习项目
-* MyBatis 入门实践
-* GitHub 个人作品展示
+- Java Web 学习项目
+- Spring Boot 入门实践
+- MyBatis 数据库开发练习
+- GitHub 个人作品展示
 
 ---
 
-## 🚀 功能特性
+# ✨ 功能展示
 
-### 🎯 抽卡系统
+## 🎯 抽卡系统
 
-* 单抽
-* 十连抽
-* 随机角色生成
-* 概率模拟
+- 单抽
+- 十连抽
+- 随机角色生成
+- 抽卡次数统计
+- 页面刷新后重置抽卡状态（伪抽卡演示）
 
-### 👤 角色管理
+## 👤 角色管理
 
-* 角色查询
-* 角色列表展示
-* 数据库存储
+- 查看角色列表
+- 添加角色
+- 删除角色
+- 防止重复添加角色
 
-### 💾 数据持久化
+## 🌐 前后端交互
 
-* MySQL 数据库
-* MyBatis 映射管理
-* CRUD 操作
+- 静态页面调用 Spring Boot REST API
+- JSON 数据交互
+- 页面与后台数据实时同步
 
-### 🔧 系统架构
+## 💾 数据持久化
 
-* Spring Boot
-* MVC 分层设计
-* RESTful 接口风格
-
----
-
-## 🛠 技术栈
-
-| 技术            | 说明      |
-| ------------- | ------- |
-| Java          | JDK 17  |
-| Spring Boot   | Web开发框架 |
-| MyBatis       | ORM框架   |
-| MySQL         | 数据存储    |
-| Maven         | 项目管理    |
-| IntelliJ IDEA | 开发工具    |
+- MySQL 数据库存储角色信息
+- MyBatis Mapper 操作数据库
+- 基本 CRUD 功能
 
 ---
 
-## 📁 项目结构
+# 🛠 技术栈
+
+| 技术 | 说明 |
+|------|------|
+| Java 17 | 开发语言 |
+| Spring Boot | Web 后端框架 |
+| MyBatis | 持久层框架 |
+| MySQL | 数据库 |
+| Maven | 项目管理 |
+| HTML | 页面开发 |
+| CSS | 页面样式 |
+| JavaScript | 页面交互 |
+| Axios | 前后端 HTTP 通信 |
+
+---
+
+# 📂 项目结构
 
 ```text
-Fake-gacha
-│
-├── src
-│   ├── main
-│   │   ├── java
-│   │   │   └── com.dream.demo
-│   │   │       ├── controller
-│   │   │       ├── service
-│   │   │       ├── mapper
-│   │   │       ├── entity
-│   │   │       └── DemoApplication
-│   │   │
-│   │   ├── resources
-│   │   │   ├── mapper
-│   │   │   ├── static
-│   │   │   ├── templates
-│   │   │   └── application.properties
+src
+├── main
+│   ├── java
+│   │   └── com.dream
+│   │       ├── controller
+│   │       ├── Service
+│   │       ├── mapper
+│   │       ├── entity
+│   │       └── common
 │   │
-│   └── test
-│
-├── pom.xml
-├── schema.sql
-└── README.md
+│   └── resources
+│       ├── static
+│       │   ├── gacha.html
+│       │   └── admin.html
+│       ├── mapper
+│       └── application.properties
 ```
 
 ---
 
-## ⚙️ 环境要求
+# 🚀 已实现功能
 
-| 软件    | 版本    |
-| ----- | ----- |
-| JDK   | 17+   |
-| Maven | 3.8+  |
-| MySQL | 8.0+  |
-| IDEA  | 2023+ |
+✅ Spring Boot 项目搭建
+
+✅ RESTful API 开发
+
+✅ MyBatis 数据库操作
+
+✅ 角色增删查功能
+
+✅ 单抽、十连抽接口
+
+✅ 抽卡概率模拟
+
+✅ 抽卡次数统计
+
+✅ 页面刷新自动重置抽卡状态
+
+✅ 静态页面访问（resources/static）
 
 ---
 
-## 📦 快速开始
+# ⚙️ 环境要求
 
-### 1. 克隆项目
+| 软件 | 版本 |
+|------|------|
+| JDK | 17+ |
+| Maven | 3.8+ |
+| MySQL | 8.0+ |
 
-SSH：
+---
 
-```bash
-git clone git@github.com:rookie-xiaomo/Fake-gacha.git
-```
+# 📦 快速开始
 
-HTTPS：
+## 1. 克隆项目
+
+### HTTPS
 
 ```bash
 git clone https://github.com/rookie-xiaomo/Fake-gacha.git
 ```
 
+### SSH
+
+```bash
+git clone git@github.com:rookie-xiaomo/Fake-gacha.git
+```
+
+进入项目目录：
+
+```bash
+cd Fake-gacha
+```
+
 ---
 
-### 2. 创建数据库
+# 2. 环境准备
+
+运行本项目需要以下环境：
+
+| 软件 | 推荐版本 |
+|------|-----------|
+| JDK | 17 |
+| Maven | 3.8+ |
+| MySQL | 8.0+ |
+| IntelliJ IDEA | 2023 或以上 |
+
+确认安装成功：
+
+```bash
+java -version
+```
+
+```bash
+mvn -version
+```
+
+```bash
+mysql --version
+```
+
+---
+
+# 3. 创建数据库
+
+打开 MySQL。
+
+例如：
+
+```bash
+mysql -uroot -p
+```
+
+输入密码进入数据库。
+
+创建数据库：
 
 ```sql
-CREATE DATABASE game_db DEFAULT CHARACTER SET utf8mb4;
+CREATE DATABASE game_db
+DEFAULT CHARACTER SET utf8mb4
+COLLATE utf8mb4_general_ci;
+```
+
+查看数据库：
+
+```sql
+SHOW DATABASES;
+```
+
+出现
+
+```
+game_db
+```
+
+说明创建成功。
+
+---
+
+# 4. 创建数据表
+
+切换数据库：
+
+```sql
+USE game_db;
+```
+
+执行下面 SQL：
+
+```sql
+CREATE TABLE gamecharacter (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL UNIQUE,
+    level INT NOT NULL
+);
+```
+
+查看是否创建成功：
+
+```sql
+SHOW TABLES;
+```
+
+可以看到：
+
+```
+gamecharacter
 ```
 
 ---
 
-### 3. 导入数据库脚本
+# 5. 初始化数据（推荐）
 
-执行项目中的：
+由于抽卡系统需要不同等级角色，因此建议提前插入一些测试数据。
 
-```text
-schema.sql
+例如：
+
+```sql
+INSERT INTO gamecharacter(name,level) VALUES
+('安柏',1),
+('凯亚',1),
+('丽莎',1),
+('诺艾尔',3),
+('凝光',3),
+('香菱',3),
+('刻晴',5),
+('钟离',5),
+('神里绫华',5);
 ```
 
-完成表结构初始化。
+查看数据：
+
+```sql
+SELECT * FROM gamecharacter;
+```
 
 ---
 
-### 4. 修改数据库配置
+# 6. 修改数据库配置
 
-编辑：
+打开：
 
-```text
+```
 src/main/resources/application.properties
 ```
 
+修改为自己的数据库信息。
+
+例如：
+
 ```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/game_db
+spring.datasource.url=jdbc:mysql://localhost:3306/game_db?serverTimezone=Asia/Shanghai
+
 spring.datasource.username=root
+
 spring.datasource.password=123456
+
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 ```
 
-根据实际情况修改用户名和密码。
+如果数据库用户名或密码不同，请自行修改。
 
 ---
 
-### 5. 启动项目
+# 7. 下载 Maven 依赖
 
-运行：
+第一次运行建议执行：
 
-```java
-DemoApplication
+```bash
+mvn clean install
 ```
 
 或者：
 
 ```bash
+mvn dependency:resolve
+```
+
+等待依赖下载完成。
+
+---
+
+# 8. 启动项目
+
+在 IDEA 中运行：
+
+```
+DemoApplication
+```
+
+或者命令行：
+
+```bash
 mvn spring-boot:run
 ```
 
-启动成功后访问：
+控制台看到类似信息：
 
-```text
-http://localhost:8080
+```
+Tomcat started on port(s): 8080
+Started DemoApplication
+```
+
+表示启动成功。
+
+---
+
+# 9. 访问页面
+
+抽卡页面：
+
+```
+http://localhost:8080/gacha.html
+```
+
+后台管理：
+
+```
+http://localhost:8080/admin.html
 ```
 
 ---
 
-## 🧪 常见问题
+# 10. 功能体验
 
-### 数据库连接失败
+可以体验以下功能：
+
+## 抽卡页面
+
+- 单抽
+- 十连抽
+- 查看抽卡结果
+- 查看当前持有角色
+- 页面刷新后自动重置抽卡次数
+
+## 后台页面
+
+- 查看角色列表
+- 添加角色
+- 删除角色
+- 实时同步数据库内容
+
+---
+
+# 11. 常见问题
+
+## ① 数据库连接失败
 
 检查：
 
-```properties
+```
+application.properties
+```
+
+中的：
+
+```
 spring.datasource.url
+
 spring.datasource.username
+
 spring.datasource.password
 ```
 
-是否正确。
+是否填写正确。
 
 ---
 
-### Unknown database 'game_db'
+## ② Unknown database 'game_db'
+
+说明数据库不存在。
 
 执行：
 
@@ -205,50 +408,116 @@ CREATE DATABASE game_db;
 
 ---
 
-### Maven 下载失败
+## ③ Communications link failure
 
-执行：
+说明 MySQL 服务未启动。
 
-```bash
-mvn clean install
+Windows：
+
+打开：
+
+```
+服务(Service)
 ```
 
-或者配置阿里云 Maven 镜像。
+启动：
 
----
-
-### JDK版本不兼容
-
-推荐：
-
-```text
-JDK 17
+```
+MySQL80
 ```
 
-不要使用 JDK 8。
+即可。
 
 ---
 
-## 📈 后续优化方向
+## ④ 端口被占用
 
-* [ ] 抽卡概率公示
-* [ ] 保底机制
-* [ ] 用户系统
-* [ ] 登录注册
-* [ ] Redis缓存
-* [ ] Docker部署
-* [ ] 前后端分离
+默认端口：
+
+```
+8080
+```
+
+如果被占用，可以修改：
+
+```
+application.properties
+```
+
+添加：
+
+```properties
+server.port=8081
+```
+
+然后访问：
+
+```
+http://localhost:8081/gacha.html
+```
 
 ---
 
-## 👨‍💻 作者
+## ⑤ 页面为空
+
+确认：
+
+```
+src/main/resources/static
+```
+
+下面存在：
+
+```
+gacha.html
+
+admin.html
+```
+
+访问时需要带文件名：
+
+```
+http://localhost:8080/gacha.html
+
+http://localhost:8080/admin.html
+```
+
+不要直接访问：
+
+```
+http://localhost:8080
+```
+
+否则 Spring Boot 会寻找：
+
+```
+index.html
+```
+
+而项目中没有该文件。
+
+---
+
+# 📈 后续计划
+
+- [ ] 登录功能
+- [ ] 用户抽卡记录
+- [ ] 图片资源替换
+- [ ] 优化抽卡动画
+- [ ] 用户背包持久化
+- [ ] Docker 部署
+- [ ] Redis 缓存
+
+---
+
+# 👨‍💻 作者
 
 GitHub：
 
-https://github.com/rookie-xiaomo
+**rookie-xiaomo**
 
 ---
 
-## 📄 License
+# 📄 License
 
-本项目仅供学习交流使用，请勿用于商业用途。
+本项目仅供学习与交流使用。
